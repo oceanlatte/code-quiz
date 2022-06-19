@@ -31,7 +31,7 @@ body {
   color: #511730;
 }
 
-.welcome-page, .questions-container {
+.welcome-page, .quiz-container {
   height: 100%;
   margin: 80px auto;
   padding: 20px 10px;
@@ -71,11 +71,11 @@ body {
   background-color: #8E443D;
 }
 
-.questions-container {
+.quiz-container {
   visibility: hidden;
 }
 
-#question {
+.question {
   font-size: 35px;
   padding-bottom: 30px;
 }
@@ -83,4 +83,8 @@ body {
 .option-answers {
   list-style: none;
   margin-bottom: 20px;
+}
+
+#right-wrong {
+  visibility: hidden;
 }

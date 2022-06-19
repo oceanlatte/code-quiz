@@ -1,24 +1,109 @@
 var timer = 10;
 
+// start quiz DOM elements
 var startEl = document.querySelector("#start-btn");
 var countdownEl = document.querySelector("#countdown");
 var welcomeEl = document.querySelector(".welcome-page");
-var questionsEl = document.querySelector(".questions-container");
 
-function hideWelcome() {
+// quiz DOM elements
+var quizEl = document.querySelector(".quiz-container"); //div question container
+var quesTitleEl = document.querySelector(".question"); // div question title
+var listOptionEl = document.querySelector(".add-options"); //ul to use for appendChild
+
+// quiz Array of questions and answers
+var quizArr = [
+  {
+    question: "What does the term 'production' refer to?",
+    answers: {
+      option1: "The product that is currently being worked on.",
+      option2: "The product that is currently being used by users.",
+      option3: "The process of writing code.",
+      option4: "The process of working with a team to produce a project.",
+    },
+    correctAnswer: "option2",
+  },
+  {
+    question: "What does DRY stand for?",
+    answers: {
+      option1: "don't repeat yourself",
+      option2: "do repeat yourself",
+      option3: "donuts rice yarn",
+      option4: "debug refactor yesterday",
+    },
+    correctAnswer: "option1",
+  },
+  {
+    question: "When does wireframing for a project take place?",
+    answers: {
+      option1: "In the morning",
+      option2: "At night",
+      option3: "Before starting to type out any code for a new project",
+      option4: "The second week of the month",
+    },
+    correctAnswer: "option3",
+  },
+  {
+    question: "What does 'mkdir' do in Git?",
+    answers: {
+      option1: "creates a new repository",
+      option2: "shows the history of your previous commits",
+      option3: "makes a new file",
+      option4: "makes a new directory",
+    },
+    correctAnswer: "option4",
+  },
+  {
+    question: "Which is NOT true about the <section> tag in HTML?",
+    answers: {
+      option1: "It can be used instead of a <div> tag",
+      option2: "It can be used to make for better search engine optimization",
+      option3: "It makes all text bold",
+      option4: "It requires a closing tag",
+    },
+    correctAnswer: "option3",
+  },
+  {
+    question:
+      "What would the following declaration be showing each side get for padding? Padding: 10px, 20px, 0px, 5px",
+    answers: {
+      option1: "top: 10px, right: 20px, bottom: 0px, left: 5px",
+      option2: "bottom: 10px, left: 20px, top: 0px, right: 5px",
+      option3: "right: 10px, bottom: 20px, left: 0px, top: 5px",
+      option4: "left: 10px, bottom: 20px, right: 0px, top: 5px",
+    },
+    correctAnswer: "option1",
+  },
+];
+
+
+function startQuiz() {
   welcomeEl.setAttribute("style", "display:none;");
-  questionsEl.setAttribute("style", "visibility:visible;");
+  quizEl.setAttribute("style", "visibility:visible;");
+  // startTimer();
+
+  quizQuestions();
 }
 
+function quizQuestions(currentQuestion) {
+  for (var i = 0; i < quizArr.length; i++) {
+    console.log(quizArr[i]);
+  }
 
-// function startQuiz() {
-//   console.log("start button clicked");
-// };
+  var renderQuestion = document.createElement("h2");
+    renderQuestion.className = "question";
+    renderQuestion.textContent = quizArr[0].question;
+    quesTitleEl.appendChild(renderQuestion);
 
-// function timerCount() {
+  var renderOption = document.createElement("li");
+    renderOption.className = "option-answers";
+    renderOption.textContent = quizArr[0].answers.option1;
+    listOptionEl.appendChild(renderOption);
+}
+
+// function startTimer() {
 //   countdownEl.textContent = timer + " seconds";
 //   timer--;
-  
+
 //   if (timer < 0) {
 //     countdownEl.textContent = 0 + " seconds";
 //     clearInterval(timerInterval);
@@ -28,4 +113,4 @@ function hideWelcome() {
 // var timerInterval = setInterval(timerCount, 1000);
 
 // event listeners
-startEl.addEventListener("click", hideWelcome);
+startEl.addEventListener("click", startQuiz);

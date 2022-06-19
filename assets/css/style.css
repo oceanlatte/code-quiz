@@ -31,7 +31,7 @@ body {
   color: #511730;
 }
 
-.welcome-page {
+.welcome-page, .questions-container {
   height: 100%;
   margin: 80px auto;
   padding: 20px 10px;
@@ -56,17 +56,31 @@ body {
   font-size: 20px;
 }
 
-#start-btn {
+#start-btn, .option-answers {
   background-color: #CB9173;
   padding: 15px 20px;
-  border-radius: 10px;
   color: #FFFFFF;
   font-size: 16px;
   font-family:'Courier New', Courier, monospace;
   font-weight: bold;
-  border-color: #511730;
+  border: 2px solid #511730;
+  border-radius: 10px;
 }
 
-#start-btn:hover {
+#start-btn:hover, .option-answers:hover {
   background-color: #8E443D;
+}
+
+.questions-container {
+  visibility: hidden;
+}
+
+#question {
+  font-size: 35px;
+  padding-bottom: 30px;
+}
+
+.option-answers {
+  list-style: none;
+  margin-bottom: 20px;
 }

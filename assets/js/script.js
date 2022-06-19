@@ -3,9 +3,11 @@ var timer = 10;
 var startEl = document.querySelector("#start-btn");
 var countdownEl = document.querySelector("#countdown");
 var welcomeEl = document.querySelector(".welcome-page");
+var questionsEl = document.querySelector(".questions-container");
 
 function hideWelcome() {
   welcomeEl.setAttribute("style", "display:none;");
+  questionsEl.setAttribute("style", "visibility:visible;");
 }
 
 

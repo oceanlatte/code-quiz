@@ -74,7 +74,7 @@ var quizArr = [
       option4: "left: 10px, bottom: 20px, right: 0px, top: 5px",
     },
     correctAnswer: 1,
-  }
+  },
 ];
 
 function startQuiz() {
@@ -89,40 +89,53 @@ function quizQuestions() {
   var currentQuestion = quizArr[questionCount].question;
 
   var renderQuestion = document.createElement("h2");
-    renderQuestion.className = "question";
-    renderQuestion.setAttribute("id", 5);
-    renderQuestion.textContent = currentQuestion;
-    questionTitleEl.appendChild(renderQuestion);
+  renderQuestion.className = "question";
+  renderQuestion.setAttribute("id", 5);
+  renderQuestion.textContent = currentQuestion;
+  questionTitleEl.appendChild(renderQuestion);
 
   var renderOption1 = document.createElement("li");
-    renderOption1.className = "option-answers";
-    renderOption1.setAttribute("id", 1)
-    renderOption1.textContent = quizArr[questionCount].answers.option1;
-    listOptionEl.appendChild(renderOption1);
+  renderOption1.className = "option-answers";
+  renderOption1.setAttribute("id", 1);
+  renderOption1.textContent = quizArr[questionCount].answers.option1;
+  listOptionEl.appendChild(renderOption1);
 
   var renderOption2 = document.createElement("li");
-    renderOption2.className = "option-answers";
-    renderOption2.setAttribute("id", 2)
-    renderOption2.textContent = quizArr[questionCount].answers.option2;
-    listOptionEl.appendChild(renderOption2);
+  renderOption2.className = "option-answers";
+  renderOption2.setAttribute("id", 2);
+  renderOption2.textContent = quizArr[questionCount].answers.option2;
+  listOptionEl.appendChild(renderOption2);
 
   var renderOption3 = document.createElement("li");
-    renderOption3.className = "option-answers";
-    renderOption3.setAttribute("id", 3)
-    renderOption3.textContent = quizArr[questionCount].answers.option3;
-    listOptionEl.appendChild(renderOption3);
-    
-  var renderOption4 = document.createElement("li");
-    renderOption4.className = "option-answers";
-    renderOption4.setAttribute("id", 4)
-    renderOption4.textContent = quizArr[questionCount].answers.option4;
-    listOptionEl.appendChild(renderOption4);
+  renderOption3.className = "option-answers";
+  renderOption3.setAttribute("id", 3);
+  renderOption3.textContent = quizArr[questionCount].answers.option3;
+  listOptionEl.appendChild(renderOption3);
 
-    renderOption1.addEventListener("click", nextQuestion);
-    renderOption2.addEventListener("click", nextQuestion);
-    renderOption3.addEventListener("click", nextQuestion);
-    renderOption4.addEventListener("click", nextQuestion);
+  var renderOption4 = document.createElement("li");
+  renderOption4.className = "option-answers";
+  renderOption4.setAttribute("id", 4);
+  renderOption4.textContent = quizArr[questionCount].answers.option4;
+  listOptionEl.appendChild(renderOption4);
+
+  renderOption1.addEventListener("click", clickOption);
+  renderOption2.addEventListener("click", clickOption);
+  renderOption3.addEventListener("click", clickOption);
+  renderOption4.addEventListener("click", clickOption);
 };
+
+function clickOption(event) {
+  var clicked = event.target.getAttribute("id");
+  console.log(clicked);
+  console.log(quizArr[questionCount].correctAnswer);
+
+  if (clicked == quizArr[questionCount].correctAnswer) {
+    nextQuestion();
+  }
+  else {
+  timer = timer - 10;
+  }
+}
 
 function nextQuestion() {
   renderOption1 = document.getElementById(1);
@@ -137,25 +150,23 @@ function nextQuestion() {
   listOptionEl.removeChild(renderOption4);
   questionTitleEl.removeChild(renderQuestion);
 
-  console.log("event is listening");
+  // console.log("event is listening");
   questionCount++;
   quizQuestions();
 };
 
-// Start timer function 
+// Start timer function
 function startTimer() {
-  var timerInterval = setInterval(function() {
+  var timerInterval = setInterval(function () {
     if (timer > 0) {
       countdownEl.textContent = timer + " seconds";
       timer--;
-    }
-    else {
+    } else {
       countdownEl.textContent = 0 + " seconds";
       clearInterval(timerInterval);
     }
   }, 1000);
 };
-
 
 // event listeners
 startEl.addEventListener("click", startQuiz);

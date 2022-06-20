@@ -1,6 +1,5 @@
-var timer = 10;
-var count = 0;
-
+var timer = 60;
+var questionCount = 0;
 
 // start quiz DOM elements
 var startEl = document.getElementById("start-btn");
@@ -9,7 +8,7 @@ var welcomeEl = document.querySelector(".welcome-page");
 
 // quiz DOM elements
 var quizEl = document.querySelector(".quiz-container"); // div question container
-var quesTitleEl = document.querySelector(".question"); // div question title
+var questionTitleEl = document.querySelector(".question"); // div question title
 var listOptionEl = document.querySelector(".add-options"); // ul class for appendChild li
 var optionAnswersEl = document.querySelector(".option-answers"); // li class
 
@@ -23,7 +22,7 @@ var quizArr = [
       option3: "The process of writing code.",
       option4: "The process of working with a team to produce a project.",
     },
-    correctAnswer: "option2",
+    correctAnswer: 2,
   },
   {
     question: "What does DRY stand for?",
@@ -33,7 +32,7 @@ var quizArr = [
       option3: "donuts rice yarn",
       option4: "debug refactor yesterday",
     },
-    correctAnswer: "option1",
+    correctAnswer: 1,
   },
   {
     question: "When does wireframing for a project take place?",
@@ -43,7 +42,7 @@ var quizArr = [
       option3: "Before starting to type out any code for a new project",
       option4: "The second week of the month",
     },
-    correctAnswer: "option3",
+    correctAnswer: 3,
   },
   {
     question: "What does 'mkdir' do in Git?",
@@ -53,7 +52,7 @@ var quizArr = [
       option3: "makes a new file",
       option4: "makes a new directory",
     },
-    correctAnswer: "option4",
+    correctAnswer: 4,
   },
   {
     question: "Which is NOT true about the <section> tag in HTML?",
@@ -63,7 +62,7 @@ var quizArr = [
       option3: "It makes all text bold",
       option4: "It requires a closing tag",
     },
-    correctAnswer: "option3",
+    correctAnswer: 3,
   },
   {
     question:
@@ -74,7 +73,7 @@ var quizArr = [
       option3: "right: 10px, bottom: 20px, left: 0px, top: 5px",
       option4: "left: 10px, bottom: 20px, right: 0px, top: 5px",
     },
-    correctAnswer: "option1",
+    correctAnswer: 1,
   }
 ];
 
@@ -87,43 +86,42 @@ function startQuiz() {
 
 // Generate question to page
 function quizQuestions() {
-  var currentQuestion = quizArr[count].question;
+  var currentQuestion = quizArr[questionCount].question;
 
   var renderQuestion = document.createElement("h2");
     renderQuestion.className = "question";
     renderQuestion.setAttribute("id", 5);
     renderQuestion.textContent = currentQuestion;
-    quesTitleEl.appendChild(renderQuestion);
+    questionTitleEl.appendChild(renderQuestion);
 
   var renderOption1 = document.createElement("li");
     renderOption1.className = "option-answers";
     renderOption1.setAttribute("id", 1)
-    renderOption1.textContent = quizArr[count].answers.option1;
+    renderOption1.textContent = quizArr[questionCount].answers.option1;
     listOptionEl.appendChild(renderOption1);
 
   var renderOption2 = document.createElement("li");
     renderOption2.className = "option-answers";
     renderOption2.setAttribute("id", 2)
-    renderOption2.textContent = quizArr[count].answers.option2;
+    renderOption2.textContent = quizArr[questionCount].answers.option2;
     listOptionEl.appendChild(renderOption2);
 
   var renderOption3 = document.createElement("li");
     renderOption3.className = "option-answers";
     renderOption3.setAttribute("id", 3)
-    renderOption3.textContent = quizArr[count].answers.option3;
+    renderOption3.textContent = quizArr[questionCount].answers.option3;
     listOptionEl.appendChild(renderOption3);
     
   var renderOption4 = document.createElement("li");
     renderOption4.className = "option-answers";
     renderOption4.setAttribute("id", 4)
-    renderOption4.textContent = quizArr[count].answers.option4;
+    renderOption4.textContent = quizArr[questionCount].answers.option4;
     listOptionEl.appendChild(renderOption4);
 
     renderOption1.addEventListener("click", nextQuestion);
     renderOption2.addEventListener("click", nextQuestion);
     renderOption3.addEventListener("click", nextQuestion);
     renderOption4.addEventListener("click", nextQuestion);
-  
 };
 
 function nextQuestion() {
@@ -137,10 +135,10 @@ function nextQuestion() {
   listOptionEl.removeChild(renderOption2);
   listOptionEl.removeChild(renderOption3);
   listOptionEl.removeChild(renderOption4);
-  quesTitleEl.removeChild(renderQuestion);
+  questionTitleEl.removeChild(renderQuestion);
 
   console.log("event is listening");
-  count++;
+  questionCount++;
   quizQuestions();
 };
 

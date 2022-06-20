@@ -6,9 +6,10 @@ var countdownEl = document.querySelector("#countdown");
 var welcomeEl = document.querySelector(".welcome-page");
 
 // quiz DOM elements
-var quizEl = document.querySelector(".quiz-container"); //div question container
+var quizEl = document.querySelector(".quiz-container"); // div question container
 var quesTitleEl = document.querySelector(".question"); // div question title
-var listOptionEl = document.querySelector(".add-options"); //ul to use for appendChild
+var listOptionEl = document.querySelector(".add-options"); // ul class for appendChild li
+var optionAnswersEl = document.querySelector(".option-answers"); // li class
 
 // quiz Array of questions and answers
 var quizArr = [
@@ -72,45 +73,91 @@ var quizArr = [
       option4: "left: 10px, bottom: 20px, right: 0px, top: 5px",
     },
     correctAnswer: "option1",
-  },
+  }
 ];
-
 
 function startQuiz() {
   welcomeEl.setAttribute("style", "display:none;");
   quizEl.setAttribute("style", "visibility:visible;");
-  // startTimer();
-
+  startTimer();
   quizQuestions();
-}
+};
 
-function quizQuestions(currentQuestion) {
-  for (var i = 0; i < quizArr.length; i++) {
-    console.log(quizArr[i]);
-  }
+var count = 0;
+
+// Generate question to page
+function quizQuestions() {
+  var currentQuestion = quizArr[count].question;
 
   var renderQuestion = document.createElement("h2");
     renderQuestion.className = "question";
-    renderQuestion.textContent = quizArr[0].question;
+    renderQuestion.setAttribute("id", 5);
+    renderQuestion.textContent = currentQuestion;
     quesTitleEl.appendChild(renderQuestion);
 
-  var renderOption = document.createElement("li");
-    renderOption.className = "option-answers";
-    renderOption.textContent = quizArr[0].answers.option1;
-    listOptionEl.appendChild(renderOption);
-}
+  var renderOption1 = document.createElement("li");
+    renderOption1.className = "option-answers";
+    renderOption1.setAttribute("id", 1)
+    renderOption1.textContent = quizArr[count].answers.option1;
+    listOptionEl.appendChild(renderOption1);
 
-// function startTimer() {
-//   countdownEl.textContent = timer + " seconds";
-//   timer--;
+  var renderOption2 = document.createElement("li");
+    renderOption2.className = "option-answers";
+    renderOption2.setAttribute("id", 2)
+    renderOption2.textContent = quizArr[count].answers.option2;
+    listOptionEl.appendChild(renderOption2);
 
-//   if (timer < 0) {
-//     countdownEl.textContent = 0 + " seconds";
-//     clearInterval(timerInterval);
-//   }
-// };
+  var renderOption3 = document.createElement("li");
+    renderOption3.className = "option-answers";
+    renderOption3.setAttribute("id", 3)
+    renderOption3.textContent = quizArr[count].answers.option3;
+    listOptionEl.appendChild(renderOption3);
+    
+  var renderOption4 = document.createElement("li");
+    renderOption4.className = "option-answers";
+    renderOption4.setAttribute("id", 4)
+    renderOption4.textContent = quizArr[count].answers.option4;
+    listOptionEl.appendChild(renderOption4);
 
-// var timerInterval = setInterval(timerCount, 1000);
+    renderOption1.addEventListener("click", nextQuestion);
+    renderOption2.addEventListener("click", nextQuestion);
+    renderOption3.addEventListener("click", nextQuestion);
+    renderOption4.addEventListener("click", nextQuestion);
+  
+};
+
+function nextQuestion() {
+  renderOption1 = document.getElementById(1);
+  renderOption2 = document.getElementById(2);
+  renderOption3 = document.getElementById(3);
+  renderOption4 = document.getElementById(4);
+  renderQuestion = document.getElementById(5);
+
+  listOptionEl.removeChild(renderOption1);
+  listOptionEl.removeChild(renderOption2);
+  listOptionEl.removeChild(renderOption3);
+  listOptionEl.removeChild(renderOption4);
+  quesTitleEl.removeChild(renderQuestion);
+
+  console.log("event is listening");
+  count++;
+  quizQuestions();
+};
+
+// /* Start timer function 
+
+function startTimer() {
+  countdownEl.textContent = timer + " seconds";
+  timer--;
+
+  if (timer < 0) {
+    countdownEl.textContent = 0 + " seconds";
+    clearInterval(timerInterval);
+  }
+};
+
+var timerInterval = setInterval(startTimer, 1000);
+
 
 // event listeners
 startEl.addEventListener("click", startQuiz);

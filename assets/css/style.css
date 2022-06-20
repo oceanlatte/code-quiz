@@ -5,11 +5,11 @@
 }
 
 /* Color Palette
-dark purple: 320A28
-Tyrian Purple: 511730
+Tyrian Purple: 511730 
 Brandy: 8E443D
 Antique Brass: CB9173
-Flax: E0D68A
+Right: 669900
+Wrong: 990000
 */
 
 header {
@@ -31,6 +31,7 @@ body {
   color: #511730;
 }
 
+/* Welcome message and quiz container styling */
 .welcome-page, .quiz-container {
   height: 100%;
   margin: 80px auto;
@@ -56,6 +57,7 @@ body {
   font-size: 20px;
 }
 
+/* Button styling */
 #start-btn, .option-answers {
   background-color: #CB9173;
   padding: 15px 20px;
@@ -71,6 +73,7 @@ body {
   background-color: #8E443D;
 }
 
+/* Quiz Container Styling */
 .quiz-container {
   visibility: hidden;
 }
@@ -85,6 +88,7 @@ body {
   margin-bottom: 20px;
 }
 
+/* Right or Wrong Answer Styling */
 #right-wrong {
   visibility: hidden;
 }

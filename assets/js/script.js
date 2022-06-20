@@ -1,7 +1,9 @@
 var timer = 10;
+var count = 0;
+
 
 // start quiz DOM elements
-var startEl = document.querySelector("#start-btn");
+var startEl = document.getElementById("start-btn");
 var countdownEl = document.querySelector("#countdown");
 var welcomeEl = document.querySelector(".welcome-page");
 
@@ -83,8 +85,6 @@ function startQuiz() {
   quizQuestions();
 };
 
-var count = 0;
-
 // Generate question to page
 function quizQuestions() {
   var currentQuestion = quizArr[count].question;
@@ -144,19 +144,19 @@ function nextQuestion() {
   quizQuestions();
 };
 
-// /* Start timer function 
-
+// Start timer function 
 function startTimer() {
-  countdownEl.textContent = timer + " seconds";
-  timer--;
-
-  if (timer < 0) {
-    countdownEl.textContent = 0 + " seconds";
-    clearInterval(timerInterval);
-  }
+  var timerInterval = setInterval(function() {
+    if (timer > 0) {
+      countdownEl.textContent = timer + " seconds";
+      timer--;
+    }
+    else {
+      countdownEl.textContent = 0 + " seconds";
+      clearInterval(timerInterval);
+    }
+  }, 1000);
 };
-
-var timerInterval = setInterval(startTimer, 1000);
 
 
 // event listeners

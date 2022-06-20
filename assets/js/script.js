@@ -1,10 +1,12 @@
 var timer = 60;
 var questionCount = 0;
+var scoreKeeper = 0;
 
 // start quiz DOM elements
 var startEl = document.getElementById("start-btn");
 var welcomeEl = document.querySelector(".welcome-page");
 var countdownEl = document.querySelector("#countdown"); // number of seconds
+var scoreEl = document.querySelector("#score");
 
 // quiz DOM elements
 var quizEl = document.querySelector(".quiz-container"); // div question container
@@ -77,10 +79,15 @@ var quizArr = [
   },
 ];
 
+function scoreTracker() {
+  scoreEl.textContent = scoreKeeper;
+};
+
 function startQuiz() {
   welcomeEl.setAttribute("style", "display:none;");
   quizEl.setAttribute("style", "visibility:visible;");
   startTimer();
+  scoreTracker();
   quizQuestions();
 };
 
@@ -130,6 +137,8 @@ function clickOption(event) {
   console.log(quizArr[questionCount].correctAnswer);
 
   if (clicked == quizArr[questionCount].correctAnswer) {
+    scoreKeeper += 10;
+    scoreTracker();
     nextQuestion();
   }
   else {

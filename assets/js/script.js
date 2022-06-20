@@ -3,8 +3,8 @@ var questionCount = 0;
 
 // start quiz DOM elements
 var startEl = document.getElementById("start-btn");
-var countdownEl = document.querySelector("#countdown");
 var welcomeEl = document.querySelector(".welcome-page");
+var countdownEl = document.querySelector("#countdown"); // number of seconds
 
 // quiz DOM elements
 var quizEl = document.querySelector(".quiz-container"); // div question container
@@ -133,7 +133,8 @@ function clickOption(event) {
     nextQuestion();
   }
   else {
-  timer = timer - 10;
+    timer = timer - 10;
+    nextQuestion();
   }
 }
 
@@ -150,7 +151,7 @@ function nextQuestion() {
   listOptionEl.removeChild(renderOption4);
   questionTitleEl.removeChild(renderQuestion);
 
-  // console.log("event is listening");
+    // console.log("event is listening");
   questionCount++;
   quizQuestions();
 };
@@ -170,3 +171,4 @@ function startTimer() {
 
 // event listeners
 startEl.addEventListener("click", startQuiz);
+

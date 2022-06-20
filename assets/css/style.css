@@ -21,7 +21,7 @@ header {
   align-items: center;
 }
 
-#timer {
+header p {
   font-size: 20px;
   padding-right: 15px;
 }

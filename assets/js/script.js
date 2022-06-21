@@ -5,14 +5,15 @@ var scoreKeeper = 0;
 // start quiz DOM elements
 var startEl = document.getElementById("start-btn");
 var welcomeEl = document.querySelector(".welcome-page");
-var countdownEl = document.querySelector("#countdown"); // number of seconds
-var scoreEl = document.querySelector("#score");
+var countdownEl = document.querySelector("#countdown"); // display number of seconds on page
+var scoreEl = document.querySelector("#score"); // display score # on page
 
 // quiz DOM elements
 var quizEl = document.querySelector(".quiz-container"); // div question container
 var questionTitleEl = document.querySelector(".question"); // div question title
 var listOptionEl = document.querySelector(".add-options"); // ul class for appendChild li
 var optionAnswersEl = document.querySelector(".option-answers"); // li class
+var endQuizEl = document.querySelector(".end-score"); //score div 
 
 // quiz Array of questions and answers
 var quizArr = [
@@ -79,19 +80,36 @@ var quizArr = [
   },
 ];
 
-function scoreTracker() {
-  scoreEl.textContent = scoreKeeper;
-};
-
 function startQuiz() {
+  //Change Div that displays
   welcomeEl.setAttribute("style", "display:none;");
   quizEl.setAttribute("style", "visibility:visible;");
+
   startTimer();
   scoreTracker();
   quizQuestions();
 };
 
-// Generate question to page
+// Start timer function
+function startTimer() {
+  var timerInterval = setInterval(function () {
+    if (timer > 0) {
+      countdownEl.textContent = timer + " seconds";
+      timer--;
+    } else {
+      countdownEl.textContent = 0 + " seconds";
+      timer = 0;
+      clearInterval(timerInterval);
+    }
+  }, 1000);
+};
+
+// Score tracker function
+function scoreTracker() {
+  scoreEl.textContent = scoreKeeper;
+};
+
+// Generate question and options to page
 function quizQuestions() {
   var currentQuestion = quizArr[questionCount].question;
 
@@ -133,19 +151,22 @@ function quizQuestions() {
 
 function clickOption(event) {
   var clicked = event.target.getAttribute("id");
-  console.log(clicked);
-  console.log(quizArr[questionCount].correctAnswer);
+  // console.log(clicked);
+  // console.log(quizArr[questionCount].correctAnswer);
 
   if (clicked == quizArr[questionCount].correctAnswer) {
     scoreKeeper += 10;
     scoreTracker();
     nextQuestion();
   }
-  else {
+  else if (clicked !== quizArr[questionCount].correctAnswer && timer > 10) {
     timer = timer - 10;
     nextQuestion();
   }
-}
+  else {
+    endQuiz();
+  }
+};
 
 function nextQuestion() {
   renderOption1 = document.getElementById(1);
@@ -160,23 +181,24 @@ function nextQuestion() {
   listOptionEl.removeChild(renderOption4);
   questionTitleEl.removeChild(renderQuestion);
 
-    // console.log("event is listening");
-  questionCount++;
-  quizQuestions();
+  questionCount++; 
+  console.log(questionCount);
+  console.log(quizArr.length);
+  
+  if (questionCount < quizArr.length && timer > 0) {
+    console.log("true");
+    quizQuestions();
+  } 
+  else {
+    console.log("else true " + timer);
+    endQuiz();
+  }
 };
 
-// Start timer function
-function startTimer() {
-  var timerInterval = setInterval(function () {
-    if (timer > 0) {
-      countdownEl.textContent = timer + " seconds";
-      timer--;
-    } else {
-      countdownEl.textContent = 0 + " seconds";
-      clearInterval(timerInterval);
-    }
-  }, 1000);
-};
+function endQuiz() {
+  quizEl.setAttribute("style", "display:none;");
+  endQuizEl.setAttribute("style", "visibility: visible;");
+}
 
 // event listeners
 startEl.addEventListener("click", startQuiz);

@@ -24,7 +24,7 @@
       <p>
         Good luck!!
       </p>
-      <button id="start-btn">Start Quiz</button>
+      <button class="btn" id="start-btn">Start Quiz</button>
     </section>
 
     <!-- Quiz Question containers -->
@@ -33,10 +33,18 @@
         <ul class="add-options">
           <!-- <li class="option-answers"></li> -->
         </ul>
-      <!-- <div id="right-wrong">
-        <p>Answer right or wrong displays here</p>
-      </div> -->
-    </sec>
+      </section>
+
+    <div class="end-score" id="end-quiz">
+      <h3>Score Tracker:</h3>
+      <form>
+        <p>Great Job! Enter your initials to track your high scores:</p>
+        <label for="initials">Initials:</label>
+        <input type="text" placeholder="Your Initials"/>
+        <button type="submit" class="btn end-submit">Submit</button>
+      </form>
+    </div>
+    
   </main>
   <script src="./assets/js/script.js"></script>
 </body>

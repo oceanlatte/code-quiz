@@ -43,8 +43,13 @@ body {
   line-height: 1.5;
 }
 
-.welcome-page h1 {
+.welcome-page h1, #end-quiz h3 {
   border-bottom: 2px solid #CB9173;
+}
+
+#description, #end-quiz p, #end-quiz label {
+  padding: 30px 20px;
+  font-size: 20px;
 }
 
 .welcome-page p {
@@ -52,13 +57,8 @@ body {
   font-size: 25px;
 }
 
-#description {
-  padding: 30px 20px;
-  font-size: 20px;
-}
-
 /* Button styling */
-#start-btn, .option-answers {
+.btn, .option-answers {
   background-color: #CB9173;
   padding: 15px 20px;
   color: #FFFFFF;
@@ -69,7 +69,7 @@ body {
   border-radius: 10px;
 }
 
-#start-btn:hover, .option-answers:hover {
+.btn:hover, .option-answers:hover {
   background-color: #8E443D;
 }
 
@@ -88,7 +88,38 @@ body {
   margin-bottom: 20px;
 }
 
-/* Right or Wrong Answer Styling */
-#right-wrong {
+/* Score Tracker styling */
+.end-score {
+  /* used to hide this div until end of quiz */
   visibility: hidden;
+}
+
+#end-quiz {
+  margin: 0 10px;
+}
+
+#end-quiz h3 {
+  font-size: 25px;
+  width: fit-content;
+  margin: 40px 0 0 10px;
+}
+
+.end-submit {
+  padding: 10px 20px;
+}
+
+#end-quiz input {
+  height: 40px;
+  border-radius: 10px;
+  border: 2px solid #511730;
+}
+
+#end-quiz input:hover, #end-quiz input[type=text]:hover {
+  background-color:#CB9173;
+  color: #FFFFFF;
+}
+
+#end-quiz input[type=text] {
+  font-family:'Courier New', Courier, monospace;
+  padding-left: 10px;
 }

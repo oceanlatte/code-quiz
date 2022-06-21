@@ -6,7 +6,7 @@ var scoreKeeper = 0;
 var startEl = document.getElementById("start-btn");
 var welcomeEl = document.querySelector(".welcome-page");
 var countdownEl = document.querySelector("#countdown"); // display number of seconds on page
-var scoreEl = document.querySelector("#score"); // display score # on page
+var scoreEl = document.querySelectorAll("span.score"); // display score # on page
 
 // quiz DOM elements
 var quizEl = document.querySelector(".quiz-container"); // div question container
@@ -106,7 +106,9 @@ function startTimer() {
 
 // Score tracker function
 function scoreTracker() {
-  scoreEl.textContent = scoreKeeper;
+  for (var i = 0; i < scoreEl.length; i++) {
+  scoreEl[i].textContent = scoreKeeper;
+  }
 };
 
 // Generate question and options to page
@@ -182,11 +184,8 @@ function nextQuestion() {
   questionTitleEl.removeChild(renderQuestion);
 
   questionCount++; 
-  console.log(questionCount);
-  console.log(quizArr.length);
   
   if (questionCount < quizArr.length && timer > 0) {
-    console.log("true");
     quizQuestions();
   } 
   else {
@@ -197,7 +196,7 @@ function nextQuestion() {
 
 function endQuiz() {
   quizEl.setAttribute("style", "display:none;");
-  endQuizEl.setAttribute("style", "visibility: visible;");
+  endQuizEl.setAttribute("style", "visibility: visible;");  
 }
 
 // event listeners

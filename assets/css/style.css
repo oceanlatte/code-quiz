@@ -47,7 +47,7 @@ body {
   border-bottom: 2px solid #CB9173;
 }
 
-#description, #end-quiz p, #end-quiz label {
+#description {
   padding: 30px 20px;
   font-size: 20px;
 }
@@ -102,6 +102,11 @@ body {
   font-size: 25px;
   width: fit-content;
   margin: 40px 0 0 10px;
+}
+
+#end-quiz p, #end-quiz label {
+  margin: 20px;
+  font-size: 20px;
 }
 
 .end-submit {

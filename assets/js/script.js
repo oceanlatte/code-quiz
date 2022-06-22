@@ -19,7 +19,7 @@ var endQuizEl = document.querySelector(".end-score"); //score div
 var submitInitialsEl = document.querySelector(".end-submit"); // submit button for initials
 var highScoresEl = document.querySelector(".high-scores"); // Previous high scores div
 var addScoresEl = document.querySelector(".add-scores"); // ul class for appendChild li
-var scoresArr = {};
+var scoresArr = [];
 
 // quiz Array of questions and answers
 var quizArr = [
@@ -222,10 +222,11 @@ function endSubmitBtn(event) {
     alert("Please input your initials!");
   }
   else {
-    scoresArr.push = [{
+    currentScoresArr = [{
       initials: initialsEl,
       score: scoreKeeper, 
     }];
+    scoresArr.push(currentScoresArr);
     console.log(scoresArr);
     console.log("End quiz function happened")
     saveInitials();
@@ -241,14 +242,21 @@ function saveInitials() {
 function highScoresList() {
   var previousScores = JSON.parse(localStorage.getItem("highScores"));
   console.log(previousScores);
-  console.log("Highscores function happened")
+  console.log("Highscores function happened");
 
-  for (var i = 0; i < scoresArr.length; i++) {
-  var listScores = document.createElement("ol");
-  listScores.className = "score-list";
-  listScores.textContent = (scoresArr.initials + ": " + scoresArr.score);
-  addScoresEl.appendChild(listScores);
-  }
+  previousScores.sort(function (a, b) {
+    return b.score - a.score;
+  })
+
+  previousScores.splice(3);
+  console.log(previousScores);
+
+  // for (var i = 0; i < scoresArr.length; i++) {
+  // var listScores = document.createElement("ol");
+  // listScores.className = "score-list";
+  // listScores.textContent = (scoresArr.initials + ": " + scoresArr.score);
+  // addScoresEl.appendChild(listScores);
+  // }
 };
 
 // event listeners

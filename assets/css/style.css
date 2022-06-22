@@ -43,7 +43,7 @@ body {
   line-height: 1.5;
 }
 
-.welcome-page h1, #end-quiz h3 {
+.welcome-page h1, #end-quiz h3, .high-scores h3 {
   border-bottom: 2px solid #CB9173;
 }
 
@@ -89,7 +89,7 @@ body {
 }
 
 /* Score Tracker styling */
-.end-score {
+.end-score  {
   /* used to hide this div until end of quiz */
   visibility: hidden;
 }
@@ -98,13 +98,13 @@ body {
   margin: 0 10px;
 }
 
-#end-quiz h3 {
+#end-quiz h3, .high-scores h3 {
   font-size: 25px;
   width: fit-content;
   margin: 40px 0 0 10px;
 }
 
-#end-quiz p, #end-quiz label {
+#end-quiz p, #end-quiz label, .score-list {
   margin: 20px;
   font-size: 20px;
 }
@@ -127,4 +127,9 @@ body {
 #end-quiz input[type=text] {
   font-family:'Courier New', Courier, monospace;
   padding-left: 10px;
+}
+
+.high-scores  {
+  /* used to hide this div until end of quiz */
+  visibility: hidden;
 }

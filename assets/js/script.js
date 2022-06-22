@@ -6,7 +6,7 @@ var scoreKeeper = 0;
 var startEl = document.getElementById("start-btn");
 var welcomeEl = document.querySelector(".welcome-page");
 var countdownEl = document.querySelector("#countdown"); // display number of seconds on page
-var scoreEl = document.querySelectorAll("span.score"); // display score # on page
+var scoreEl = document.querySelectorAll(".score"); // display score # on page
 
 // quiz DOM elements
 var quizEl = document.querySelector(".quiz-container"); // div question container
@@ -15,6 +15,12 @@ var listOptionEl = document.querySelector(".add-options"); // ul class for appen
 var optionAnswersEl = document.querySelector(".option-answers"); // li class
 var endQuizEl = document.querySelector(".end-score"); //score div 
 
+// end quiz elements
+var submitInitialsEl = document.querySelector(".end-submit"); // submit button for initials
+var highScoresEl = document.querySelector(".high-scores"); // Previous high scores div
+var addScoresEl = document.querySelector(".add-scores"); // ul class for appendChild li
+var scoresArr = {};
+
 // quiz Array of questions and answers
 var quizArr = [
   {
@@ -22,8 +28,8 @@ var quizArr = [
     answers: {
       option1: "The product that is currently being worked on.",
       option2: "The product that is currently being used by users.",
-      option3: "The process of writing code.",
-      option4: "The process of working with a team to produce a project.",
+      option3: "The process of refactoring code.",
+      option4: "Working with the dream team.",
     },
     correctAnswer: 2,
   },
@@ -96,7 +102,12 @@ function startTimer() {
     if (timer > 0) {
       countdownEl.textContent = timer + " seconds";
       timer--;
-    } else {
+    } 
+    else if (timer == 0) {
+      countdownEl.textContent = 0 + " seconds";
+      endQuiz();
+    }
+    else {
       countdownEl.textContent = 0 + " seconds";
       timer = 0;
       clearInterval(timerInterval);
@@ -197,8 +208,49 @@ function nextQuestion() {
 function endQuiz() {
   quizEl.setAttribute("style", "display:none;");
   endQuizEl.setAttribute("style", "visibility: visible;");  
-}
+  timer = 0;
+};
+
+function endSubmitBtn(event) {
+  highScoresEl.setAttribute("style", "visibility:visible;");
+  var initialsEl = document.querySelector("input[class='enter-initials']").value; // initials form input
+  
+  event.preventDefault();
+  console.log(initialsEl);
+
+  if (initialsEl == ""){
+    alert("Please input your initials!");
+  }
+  else {
+    scoresArr.push = [{
+      initials: initialsEl,
+      score: scoreKeeper, 
+    }];
+    console.log(scoresArr);
+    console.log("End quiz function happened")
+    saveInitials();
+    highScoresList();
+  }
+};
+
+function saveInitials() {
+  localStorage.setItem("highScores", JSON.stringify(scoresArr));
+  console.log("Save initials function happened (: ")
+};
+
+function highScoresList() {
+  var previousScores = JSON.parse(localStorage.getItem("highScores"));
+  console.log(previousScores);
+  console.log("Highscores function happened")
+
+  for (var i = 0; i < scoresArr.length; i++) {
+  var listScores = document.createElement("ol");
+  listScores.className = "score-list";
+  listScores.textContent = (scoresArr.initials + ": " + scoresArr.score);
+  addScoresEl.appendChild(listScores);
+  }
+};
 
 // event listeners
 startEl.addEventListener("click", startQuiz);
-
+submitInitialsEl.addEventListener("click", endSubmitBtn);

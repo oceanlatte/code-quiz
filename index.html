@@ -10,7 +10,7 @@
 
 <body>
   <header>
-    <p>Score: <span class="score"></span></p>
+    <p>Score: <span class="score">?</span> / 60</p>
     <p>Time Remaining: <span id="countdown"></span></p>
   </header>
 
@@ -38,12 +38,19 @@
     <div class="end-score" id="end-quiz">
       <h3>Results:</h3>
       <form>
-        <p>Your score is: <span class="score"></span></p>
+        <p>Your score is: <span class="score"></span> out of 60.</p>
         <p>Great Job! Enter your initials to track your high scores:</p>
         <label for="initials">Initials:</label>
-        <input type="text" placeholder="Your Initials"/>
-        <button type="submit" class="btn end-submit">Submit</button>
+        <input type="text" placeholder="Your Initials" class="enter-initials" maxlength="3"/>
+        <button class="btn end-submit">Submit</button>
       </form>
+    </div>
+
+    <div class="high-scores">
+      <h3>Previous Scores:</h3>
+      <ul class="add-scores">
+        <!-- <ol class="score-list"></ol> -->
+      </ul>
     </div>
     
   </main>

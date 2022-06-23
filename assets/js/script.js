@@ -200,7 +200,6 @@ function nextQuestion() {
     quizQuestions();
   } 
   else {
-    console.log("else true " + timer);
     endQuiz();
   }
 };
@@ -227,36 +226,58 @@ function endSubmitBtn(event) {
       score: scoreKeeper, 
     }];
     scoresArr.push(currentScoresArr);
-    console.log(scoresArr);
     console.log("End quiz function happened")
-    saveInitials();
-    highScoresList();
+    console.log()
+  }
+
+  var checkScores = JSON.parse(localStorage.getItem("highScores"));
+
+  if (checkScores === null){
+    console.log("no scores yet")
+    var listScores = document.createElement("ol");
+    listScores.className = "score-list";
+    listScores.textContent = scoresArr[0][0].initials + " : "  + scoresArr[0][0].score;
+    addScoresEl.appendChild(listScores);
+    localStorage.setItem("highScores", JSON.stringify(scoresArr));
+  }
+  else {
+  saveInitials();
+  highScoresList();
   }
 };
 
 function saveInitials() {
-  localStorage.setItem("highScores", JSON.stringify(scoresArr));
+  var savedScores = JSON.parse(localStorage.getItem("highScores"));
+  localStorage.setItem("highScores", JSON.stringify(savedScores.concat(scoresArr)));
   console.log("Save initials function happened (: ")
 };
 
+
 function highScoresList() {
   var previousScores = JSON.parse(localStorage.getItem("highScores"));
-  console.log(previousScores);
-  console.log("Highscores function happened");
-
-  previousScores.sort(function (a, b) {
-    return b.score - a.score;
-  })
-
-  previousScores.splice(3);
+  console.log(scoresArr);
   console.log(previousScores);
 
-  // for (var i = 0; i < scoresArr.length; i++) {
-  // var listScores = document.createElement("ol");
-  // listScores.className = "score-list";
-  // listScores.textContent = (scoresArr.initials + ": " + scoresArr.score);
-  // addScoresEl.appendChild(listScores);
-  // }
+  if (scoresArr.length < 4) {
+    for (var i = 0; i < previousScores.length; i++) {
+      var listScores = document.createElement("ol");
+      listScores.className = "score-list";
+      listScores.textContent = "Name: " + previousScores[i][0].initials + " | Score: "  + previousScores[i][0].score;
+      addScoresEl.appendChild(listScores);
+    }
+  }
+  else {
+  var splicedScores =  previousScores.splice(5);
+  splicedScores.sort((a,b) => a.score - b.score);
+  console.log(splicedScores);
+
+  for (var i = 0; i < 5; i++) {
+  var listScores = document.createElement("ol");
+  listScores.className = "score-list";
+  listScores.textContent = "Name: " + splicedScores[i][0].initials + " | Score: "  + splicedScores[i][0].score;
+  addScoresEl.appendChild(listScores);
+  }
+  }
 };
 
 // event listeners

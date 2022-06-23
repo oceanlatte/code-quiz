@@ -15,7 +15,7 @@
   </header>
 
   <main>
-    <!-- Welcome Message -->
+    <!-- Welcome Message, hides on start button click -->
     <section class="welcome-page">
       <h1>Welcome to the Code Quiz</h1>
       <p id="description">
@@ -27,14 +27,15 @@
       <button class="btn" id="start-btn">Start Quiz</button>
     </section>
 
-    <!-- Quiz Question containers -->
+    <!-- Quiz Question containers, displays on start button click -->
     <section class="quiz-container">
       <div class="question"></div>
         <ul class="add-options">
           <!-- <li class="option-answers"></li> -->
         </ul>
-      </section>
+    </section>
 
+    <!-- End Quiz Container, displays after last question or if timer runs out-->
     <div class="end-score" id="end-quiz">
       <h3>Results:</h3>
       <form>
@@ -46,10 +47,11 @@
       </form>
     </div>
 
+    <!-- High Scores, Display previous scores on submit initials -->
     <div class="high-scores">
       <h3>Previous Scores:</h3>
-      <ul class="add-scores">
-      </ul>
+      <ul class="add-scores"></ul>
+      <p class="option-answers try-again"><a href="index.html">Try again?</a></p>
     </div>
     
   </main>

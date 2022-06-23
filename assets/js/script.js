@@ -86,8 +86,9 @@ var quizArr = [
   },
 ];
 
+// Start quiz function, triggered by start button click
 function startQuiz() {
-  //Change Div that displays
+  //Hide welcome div and show quiz div
   welcomeEl.setAttribute("style", "display:none;");
   quizEl.setAttribute("style", "visibility:visible;");
 
@@ -95,6 +96,7 @@ function startQuiz() {
   scoreTracker();
   quizQuestions();
 };
+
 
 // Start timer function
 function startTimer() {
@@ -164,8 +166,6 @@ function quizQuestions() {
 
 function clickOption(event) {
   var clicked = event.target.getAttribute("id");
-  // console.log(clicked);
-  // console.log(quizArr[questionCount].correctAnswer);
 
   if (clicked == quizArr[questionCount].correctAnswer) {
     scoreKeeper += 10;
@@ -215,28 +215,24 @@ function endSubmitBtn(event) {
   var initialsEl = document.querySelector("input[class='enter-initials']").value; // initials form input
   
   event.preventDefault();
-  console.log(initialsEl);
 
   // condition if no initials are entered
-  if (initialsEl == ""){
+  if (initialsEl == "") {
     alert("Please input your initials!");
   }
+  
   // else log score to array with initials and push to empty array
-  else {
-    currentScoresArr = [{
-      initials: initialsEl,
-      score: scoreKeeper, 
-    }];
-    scoresArr.push(currentScoresArr);
-    console.log("End quiz function happened")
-  }
+  currentScoresArr = [{
+    initials: initialsEl,
+    score: scoreKeeper, 
+  }];
+  scoresArr.push(currentScoresArr);
 
   // check if any scores are in localStoreage, if not then only log & display current score
   var checkScores = JSON.parse(localStorage.getItem("highScores"));
 
   if (checkScores === null){
-    console.log("no scores yet")
-    var listScores = document.createElement("ol");
+    var listScores = document.createElement("li");
     listScores.className = "score-list";
     listScores.textContent = scoresArr[0][0].initials + " : "  + scoresArr[0][0].score;
     addScoresEl.appendChild(listScores);
@@ -253,17 +249,16 @@ function endSubmitBtn(event) {
 function saveInitials() {
   var savedScores = JSON.parse(localStorage.getItem("highScores"));
   localStorage.setItem("highScores", JSON.stringify(savedScores.concat(scoresArr)));
-  console.log("Save initials function happened (: ")
 };
 
 // display highscores if more than 1 score
 function highScoresList() {
   var previousScores = JSON.parse(localStorage.getItem("highScores"));
-  previousScores.sort((a,b) => b[0].score - a[0].score);
+  previousScores.sort((a,b) => b[0].score - a[0].score); // sorts by highest score & overwrites original array
 
   if (previousScores.length < 4) {
     for (var i = 0; i < previousScores.length; i++) {
-      var listScores = document.createElement("ol");
+      var listScores = document.createElement("li");
       listScores.className = "score-list";
       listScores.textContent = "Name: " + previousScores[i][0].initials + " | Score: "  + previousScores[i][0].score;
       addScoresEl.appendChild(listScores);
@@ -271,7 +266,7 @@ function highScoresList() {
   }
   else {
     for (var i = 0; i < 5; i++) {
-      var listScores = document.createElement("ol");
+      var listScores = document.createElement("li");
       listScores.className = "score-list";
       listScores.textContent = "Name: " + previousScores[i][0].initials + " | Score: "  + previousScores[i][0].score;
       addScoresEl.appendChild(listScores);

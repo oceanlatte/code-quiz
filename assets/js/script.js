@@ -217,9 +217,11 @@ function endSubmitBtn(event) {
   event.preventDefault();
   console.log(initialsEl);
 
+  // condition if no initials are entered
   if (initialsEl == ""){
     alert("Please input your initials!");
   }
+  // else log score to array with initials and push to empty array
   else {
     currentScoresArr = [{
       initials: initialsEl,
@@ -227,9 +229,9 @@ function endSubmitBtn(event) {
     }];
     scoresArr.push(currentScoresArr);
     console.log("End quiz function happened")
-    console.log()
   }
 
+  // check if any scores are in localStoreage, if not then only log & display current score
   var checkScores = JSON.parse(localStorage.getItem("highScores"));
 
   if (checkScores === null){
@@ -240,25 +242,26 @@ function endSubmitBtn(event) {
     addScoresEl.appendChild(listScores);
     localStorage.setItem("highScores", JSON.stringify(scoresArr));
   }
+  // if there are scores logged to localStorage than move on
   else {
   saveInitials();
   highScoresList();
   }
 };
 
+// save initials to localStorage is more than 1 score is saved
 function saveInitials() {
   var savedScores = JSON.parse(localStorage.getItem("highScores"));
   localStorage.setItem("highScores", JSON.stringify(savedScores.concat(scoresArr)));
   console.log("Save initials function happened (: ")
 };
 
-
+// display highscores if more than 1 score
 function highScoresList() {
   var previousScores = JSON.parse(localStorage.getItem("highScores"));
-  console.log(scoresArr);
-  console.log(previousScores);
+  previousScores.sort((a,b) => b[0].score - a[0].score);
 
-  if (scoresArr.length < 4) {
+  if (previousScores.length < 4) {
     for (var i = 0; i < previousScores.length; i++) {
       var listScores = document.createElement("ol");
       listScores.className = "score-list";
@@ -267,16 +270,12 @@ function highScoresList() {
     }
   }
   else {
-  var splicedScores =  previousScores.splice(5);
-  splicedScores.sort((a,b) => a.score - b.score);
-  console.log(splicedScores);
-
-  for (var i = 0; i < 5; i++) {
-  var listScores = document.createElement("ol");
-  listScores.className = "score-list";
-  listScores.textContent = "Name: " + splicedScores[i][0].initials + " | Score: "  + splicedScores[i][0].score;
-  addScoresEl.appendChild(listScores);
-  }
+    for (var i = 0; i < 5; i++) {
+      var listScores = document.createElement("ol");
+      listScores.className = "score-list";
+      listScores.textContent = "Name: " + previousScores[i][0].initials + " | Score: "  + previousScores[i][0].score;
+      addScoresEl.appendChild(listScores);
+    }
   }
 };
 
